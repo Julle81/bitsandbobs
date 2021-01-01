@@ -2,4 +2,4 @@
 
 Bits and bobs I have done for my own amusement
 
-unique_number.cpp is a short program, that looks for the unique numbers in the array
+unique_number.cpp is a short program, that looks for the first unique number in the array
