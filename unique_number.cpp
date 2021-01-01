@@ -7,9 +7,8 @@
 
 int main()
 {
-    int size = 100;
+    int size = 1000;
     int number_array[size];
-    int second_number_array[size];
     int unique = 0;
 
     srand((unsigned)time(0));     
@@ -19,31 +18,28 @@ int main()
         number_array[i] = (rand()%size)+1;
     }
 
-    for(int i = 0; i < 100; i++)
-    { 
-        second_number_array[i] = (rand()%size)+1;
-    }
+    std::map<int, bool> checked_numbers;
 
-    std::map<int, bool> found_numbers;
-
-    for( int number : number_array)
+    for( int i = 0; i < size; i++ )
     {
-        auto search = found_numbers.find(number);
-        if (search != found_numbers.end()) 
+        int number = number_array[i];
+        std::cout << "Searching for = " + std::to_string(number) << std::endl;
+        auto search = checked_numbers.find(number);
+        if (search != checked_numbers.end()) 
         {
             continue;
         }
 
-        for( int second_number : second_number_array)
+        checked_numbers.insert( {number, true} );
+        int j = i + 1;
+        for( ; j < size; j++ )
         {
-            if( number == second_number )
+            if( number == number_array[j] )
             {
-                found_numbers.insert( {number, true} );
                 break;
             }
         }
-        search = found_numbers.find(number);
-        if ( search == found_numbers.end() ) 
+        if( j == size )
         {
             unique = number;
             break;
@@ -51,6 +47,5 @@ int main()
 
     }
 
-    std::string unique_string = "Unique number found = " + std::to_string(unique) + "\n";
-    std::cout << unique_string;
+    std::cout << "Unique number found = " + std::to_string(unique) << std::endl;
 }
